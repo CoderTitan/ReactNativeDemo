@@ -101,7 +101,7 @@ export default class App extends Component<{}> {
     _renderSectionHeader(sectionData, sectionID){
         return (
             <View style={{height:50, backgroundColor:'#e8e8e8', justifyContent:'center'}}>
-                <Text style={{color:'black', fontSize:25, marginLeft:10}}>{sectionID}</Text>
+                <Text style={styles.headerTextStyle}>{sectionID}</Text>
             </View>
         )
     }
@@ -114,7 +114,7 @@ export default class App extends Component<{}> {
     _renderRow(rowData,sectionID,rowID,highlightRow){
         return (
             <View style={styles.cellStyle}>
-                <Text style={{fontSize:18, height: 44, marginLeft:10}}>{rowData}</Text>
+                <Text style={styles.cellTextStyle}>{rowData}</Text>
             </View>
         )
 
@@ -129,10 +129,22 @@ const styles = StyleSheet.create({
         marginTop:20
     },
     cellStyle:{
+        justifyContent:'center',
         backgroundColor:'white',
         borderWidth:1,
-        borderColor:'#f7f7f7',
-        justifyContent:'center',
+        borderColor:'#f7f7f7'
+    },
+    cellTextStyle:{
+        fontSize:18,
+        height: 44,
+        marginLeft:10,
+        lineHeight:44
+    },
+    headerTextStyle:{
+        color:'black',
+        fontSize:25,
+        marginLeft:10,
+        lineHeight:50
     }
 });
 
