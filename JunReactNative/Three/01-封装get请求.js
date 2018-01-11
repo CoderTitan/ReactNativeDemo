@@ -33,15 +33,15 @@ export default class App extends Component<{}> {
 
     //组件加载完成
     componentDidMount() {
-        var parame = {page: 0}
 
-        JunNetRequest.PostWithJsonParam('http://qf.56.com/home/v4/moreAnchor.ios', parame, function (json) {
+        JunNetRequest.Get('http://qf.56.com/home/v4/moreAnchor.ios', undefined, function (json) {
             console.log(json['status'])
             alert('请求成功')
         }, function (error) {
             console.log(error)
             alert('请求失败')
         })
+
     }
 
 
