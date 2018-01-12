@@ -15,7 +15,8 @@ import {
     StyleSheet,
     View,
     Text,
-    Image
+    TouchableOpacity,
+    AsyncStorage
 } from 'react-native';
 import JunNetRequest from 'JunNetRequest'
 
@@ -31,28 +32,18 @@ const instructions = Platform.select({
 // 3.自定义 程序入口组件([[UIView alloc] init])
 export default class App extends Component<{}> {
 
-    //组件加载完成
-    componentDidMount() {
-        var parame = {page: 0}
-
-        JunNetRequest.PostWithJsonParam('http://qf.56.com/home/v4/moreAnchor.ios', parame, function (json) {
-            console.log(json['status'])
-            alert('请求成功')
-        }, function (error) {
-            console.log(error)
-            alert('请求失败')
-        })
-    }
-
-
-
     // 当一个组件要显示的时候,就会自动调用render,渲染组件
     render() {
         return (
-            <View style={{backgroundColor:'#ededed', flex:1}}>
+            <View style={styles.viewStyle}>
+                <Text style={styles.textStyle} onPress={this._saveData.bind(this)}>存储 </Text>
+                <Text style={styles.textStyle} onPress={this._readData.bind(this)}>读取 </Text>
+                <Text style={styles.textStyle} onPress={this._deleteData.bind(this)}>删除 </Text>
             </View>
         )
     }
+    
+
 
 }
 
@@ -64,9 +55,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         flex:1
     },
-    iconStyle:{
-        width:24,
-        height:24
+    textStyle:{
+        width:100,
+        height:30,
+        lineHeight:30
     }
 });
 
