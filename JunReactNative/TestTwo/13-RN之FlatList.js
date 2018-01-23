@@ -35,24 +35,16 @@ export default class App extends Component<{}> {
 
     constructor(props){
         super(props)
-        var sourceData = [
-            {name: '大护法'},
-            {name: '绣春刀II：修罗战场'},
-            {name: '神偷奶爸3'},
-            {name: '神奇女侠'},
-            {name: '摔跤吧，爸爸'},
-            {name: '悟空传'},
-            {name: '闪光少女'},
-            {name: '攻壳机动队'},
-            {name: '速度与激情8'},
-            {name: '蝙蝠侠大战超人'},
-            {name: '攻壳机动队'},
-            {name: '速度与激情8'},
-            {name: '蝙蝠侠大战超人'}
-        ]
+        var datas = []
+        for (var i = 0; i < 10; i++){
+            datas.push({
+                key: i,
+                title: i
+            })
+        }
 
         this.state = {
-            datas: sourceData
+            datas: datas
         }
     }
     componentDidMount() {
@@ -60,6 +52,14 @@ export default class App extends Component<{}> {
     }
 
     render() {
+        var datas = []
+        for (var i = 0; i < 10; i++){
+            datas.push({
+                key: i,
+                title: i
+            })
+        }
+
         return (
             <View style={styles.viewStyle}>
                 <FlatList style={{backgroundColor:'white', marginTop:30, width:414}}
@@ -67,7 +67,7 @@ export default class App extends Component<{}> {
                           ListFooterComponent={this._listFooter.bind(this)}
                           ItemSeparatorComponent={this._listSeparator.bind(this)}
                           renderItem={this._renderItem}
-                          date={this.state.datas}
+                          date={datas}
                 >
 
                 </FlatList>
@@ -78,8 +78,9 @@ export default class App extends Component<{}> {
 
     //cell
     _renderItem = ({item, index}) => {
+        var text = '第' + item.index + '行'
         return (
-            <Text style={[styles.textStyle, {height:30}]}> {item.name} </Text>
+            <Text style={[styles.textStyle, {height:30}]}> {'这是FlastList的尾部'} </Text>
         )
     }
 
