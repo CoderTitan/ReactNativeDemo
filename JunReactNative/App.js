@@ -19,7 +19,7 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
-// import JunNetRequest from 'JunNetRequest'
+import JunNetRequest from 'JunNetRequest'
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -35,74 +35,40 @@ export default class App extends Component<{}> {
 
     constructor(props){
         super(props)
-        var sourceData = [
-            {name: '大护法'},
-            {name: '绣春刀II：修罗战场'},
-            {name: '神偷奶爸3'},
-            {name: '神奇女侠'},
-            {name: '摔跤吧，爸爸'},
-            {name: '悟空传'},
-            {name: '闪光少女'},
-            {name: '攻壳机动队'},
-            {name: '速度与激情8'},
-            {name: '蝙蝠侠大战超人'},
-            {name: '攻壳机动队'},
-            {name: '速度与激情8'},
-            {name: '蝙蝠侠大战超人'}
-        ]
+
 
         this.state = {
-            datas: sourceData
+            datas: []
         }
     }
+
     componentDidMount() {
+        console.log(this.state.datas)
+
+        var url = 'http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html?size=20'
+        JunNetRequest.Get(url, null, function (json) {
+            var dataArr = json['T1348647853363']
+            console.log(dataArr.length)
+
+            this.setState({
+                datas:dataArr
+            })
+            console.log(this.state.datas.length)
+        }, function (error) {
+            console.log(error)
+        })
 
     }
 
     render() {
         return (
             <View style={styles.viewStyle}>
-                <FlatList style={{backgroundColor:'white', marginTop:30, width:414}}
-                          ListHeaderComponent={this._listHeader.bind(this)}
-                          ListFooterComponent={this._listFooter.bind(this)}
-                          ItemSeparatorComponent={this._listSeparator.bind(this)}
-                          renderItem={this._renderItem}
-                          date={this.state.datas}
-                >
 
-                </FlatList>
 
             </View>
         )
     }
 
-    //cell
-    _renderItem = ({item, index}) => {
-        return (
-            <Text style={[styles.textStyle, {height:30}]}> {item.name} </Text>
-        )
-    }
-
-    //头部
-    _listHeader(){
-        return (
-            <Text style={styles.textStyle}> {'这是FlastList的头部'} </Text>
-        )
-    }
-
-    //尾部
-    _listFooter(){
-        return (
-            <Text style={styles.textStyle}> {'这是FlastList的尾部'} </Text>
-        )
-    }
-
-    //分割线
-    _listSeparator(){
-        return (
-            <View style={{backgroundColor:'black', height:1}}/>
-        )
-    }
 
 }
 

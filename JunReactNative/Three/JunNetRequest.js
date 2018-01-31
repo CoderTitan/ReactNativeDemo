@@ -51,13 +51,13 @@ export default class JunNetRequest {
 
         fetch(url)
             .then((response)=>response.json())
-            .then((json)=>{
+            .then(function (json) {
                 //请求成功
                 if (success) {
                     success(json)
                 }
             })
-            .catch((error)=>{
+            .catch(function (error) {
                 if (failure) {
                     failure(error)
                 }
